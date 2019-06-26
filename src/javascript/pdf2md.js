@@ -1,6 +1,8 @@
 const { parse } = require('./lib/pdf.jsx')
 const { makeTransformations, transform } = require('./lib/transformations.jsx')
-
+if (typeof document == "undefined") {
+  require('./lib/domstubs.js').setStubs(global);
+}
 /**
  * Reads a 
  * @param {string|TypedArray|DocumentInitParameters|PDFDataRangeTransport} pdfBuffer

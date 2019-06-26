@@ -3,8 +3,6 @@
 /* eslint no-console: 0 */
 
 const pdf2md = require('./pdf2md')
-
-
 const fs = require('fs');
 const path = require('path')
 var argv = require('minimist')(process.argv.slice(2));

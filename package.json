@@ -1,6 +1,6 @@
 {
   "name": "@opendocsg/pdf2md",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "A PDF to Markdown Converter",
   "main": "dist/pdf2md.js",
   "bin": {
@@ -22,11 +22,14 @@
     "Markdown",
     "Converter"
   ],
-  "author": "Johannes Zillmann",
+  "author": "Open Government Products, Government Technology Agency of Singapore (https://open.gov.sg)",
+  "contributors": [
+    "Johannes Zillmann"
+  ],
   "license": "AGPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jzillmann/pdf-to-markdown"
+    "url": "https://github.com/opendocsg/pdf-to-markdown"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",

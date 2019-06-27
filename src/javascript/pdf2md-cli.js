@@ -69,6 +69,7 @@ function createMarkdownFiles(filePaths, allOutputPaths) {
   // If outputPath specified, supply callbacks to log progress
   filePaths.forEach(async function(filePath, i) {
       const callbacks = allOutputPaths[i] && {}
+      console.log(filePath)
       const pdfBuffer = fs.readFileSync(filePath)
       pdf2md(pdfBuffer, callbacks)
         .then(text => {

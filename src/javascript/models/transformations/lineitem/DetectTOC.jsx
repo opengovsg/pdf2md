@@ -271,14 +271,16 @@ function findPageAndLineFromHeadline(pages, tocLink, heightRange, fromPage, toPa
     const linkText = tocLink.lineItem.text().toUpperCase();
     for (var i = fromPage; i <= toPage; i++) {
         const page = pages[i - 1];
-        const lineIndex = page.items.findIndex(line => {
-            if (!line.type && !line.annotation && line.height >= heightRange.min && line.height <= heightRange.max) {
-                const match = wordMatch(linkText, line.text());
-                return match >= 0.5;
-            }
-            return false;
-        });
-        if (lineIndex > -1) return [i - 1, lineIndex];
+        if (page) {
+            const lineIndex = page.items.findIndex(line => {
+                if (!line.type && !line.annotation && line.height >= heightRange.min && line.height <= heightRange.max) {
+                    const match = wordMatch(linkText, line.text());
+                    return match >= 0.5;
+                }
+                return false;
+            });
+            if (lineIndex > -1) return [i - 1, lineIndex];
+        }
     }
     return [-1, -1];
 }

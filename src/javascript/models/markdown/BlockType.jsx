@@ -106,7 +106,8 @@ export function headlineByLevel(level) {
         return BlockType.H4;
     } else if (level == 5) {
         return BlockType.H5;
-    } else if (level == 6) {
+    } else {
+        // if level is >= 6, just use BlockType H6
         return BlockType.H6;
     }
     throw "Unsupported headline level: " + level + " (supported are 1-6)";

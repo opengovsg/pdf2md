@@ -4,11 +4,11 @@
  * Any copyright is dedicated to the Public Domain.
  * http://creativecommons.org/publicdomain/zero/1.0/ */
 
-function xmlEncode(s) {
+ function xmlEncode(s) {
   var i = 0, ch;
   s = String(s);
   while (i < s.length && (ch = s[i]) !== '&' && ch !== '<' &&
-          ch !== '\"' && ch !== '\n' && ch !== '\r' && ch !== '\t') {
+         ch !== '\"' && ch !== '\n' && ch !== '\r' && ch !== '\t') {
     i++;
   }
   if (i >= s.length) {
@@ -157,7 +157,7 @@ DOMElementSerializer.prototype = {
         ++this._state;
         if (node.nodeName === 'svg:svg') {
           return ' xmlns:xlink="http://www.w3.org/1999/xlink"' +
-                  ' xmlns:svg="http://www.w3.org/2000/svg"';
+                 ' xmlns:svg="http://www.w3.org/2000/svg"';
         }
         /* falls through */
       case 2:  // Initialize variables for looping over attributes.
@@ -236,7 +236,24 @@ const document = {
   },
 };
 
+function Image() {
+  this._src = null;
+  this.onload = null;
+}
+Image.prototype = {
+  get src() {
+    return this._src;
+  },
+  set src(value) {
+    this._src = value;
+    if (this.onload) {
+      this.onload();
+    }
+  },
+};
+
 exports.document = document;
+exports.Image = Image;
 
 var exported_symbols = Object.keys(exports);
 

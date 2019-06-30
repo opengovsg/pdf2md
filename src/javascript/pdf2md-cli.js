@@ -46,6 +46,7 @@ function run(folderPath, outputPath, recursive=1) {
           fs.mkdirSync(outputPath, { recursive: true })
       }
   })
+  console.log(allOutputPaths)
   createMarkdownFiles(filePaths, allOutputPaths)
 }
 
@@ -67,7 +68,7 @@ function getPaths(folderPath) {
 
 function createMarkdownFiles(filePaths, allOutputPaths) {
   // If outputPath specified, supply callbacks to log progress
-  filePaths.forEach(async function(filePath, i) {
+  filePaths.forEach(function(filePath, i) {
       const callbacks = allOutputPaths[i] && {}
       const pdfBuffer = fs.readFileSync(filePath)
       pdf2md(pdfBuffer, callbacks)
@@ -79,7 +80,6 @@ function createMarkdownFiles(filePaths, allOutputPaths) {
         })
         .catch(err => {
           console.error(err)
-          process.exit(1)
         })
   })
 }

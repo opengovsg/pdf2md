@@ -46,7 +46,6 @@ function run(folderPath, outputPath, recursive=1) {
           fs.mkdirSync(outputPath, { recursive: true })
       }
   })
-  console.log(allOutputPaths)
   createMarkdownFiles(filePaths, allOutputPaths)
 }
 

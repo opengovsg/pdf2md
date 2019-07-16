@@ -31,12 +31,18 @@
     "pdfjs-dist": "^2.1.266"
   },
   "devDependencies": {
+    "@opengovsg/eslint-config-opengovsg": "^1.0.6",
     "babel-eslint": "^10.0.2",
     "chai": "^4.2.0",
     "eslint": "^6.0.1",
+    "eslint-config-standard": "^13.0.1",
     "eslint-plugin-flowtype": "^3.11.1",
     "eslint-plugin-flowtype-comment": "^1.0.0",
+    "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jasmine": "^2.2.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
     "flow-bin": "^0.102.0",
     "mocha": "^6.1.4",
     "mock-fs": "^4.10.1",

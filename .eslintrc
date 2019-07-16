@@ -1,6 +1,6 @@
 {
   "extends": [
-    "eslint:recommended"
+    "@opengovsg/eslint-config-opengovsg"
   ],
   "parser": "babel-eslint",
   "parserOptions": {

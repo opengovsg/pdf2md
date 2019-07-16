@@ -28,12 +28,12 @@
   "dependencies": {
     "enumify": "^1.0.4",
     "minimist": "^1.2.0",
-    "pdfjs-dist": "^2.0.489"
+    "pdfjs-dist": "^2.1.266"
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.1",
-    "chai": "^3.5.0",
-    "eslint": "^3.15.0",
+    "babel-eslint": "^10.0.2",
+    "chai": "^4.2.0",
+    "eslint": "^6.0.1",
     "eslint-plugin-flowtype": "^3.11.1",
     "eslint-plugin-flowtype-comment": "^1.0.0",
     "eslint-plugin-jasmine": "^2.2.0",

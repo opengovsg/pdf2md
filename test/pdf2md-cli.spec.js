@@ -3,8 +3,8 @@ const { expect } = require('chai')
 const mock = require('mock-fs')
 const rewire = require('rewire')
 const pdf2mdCli = rewire('../lib/pdf2md-cli.js')
-const getFileAndFolderPaths = pdf2mdCli.__get__('getFileAndFolderPaths')
-const getAllFileAndFolderPaths = pdf2mdCli.__get__('getAllFileAndFolderPaths')
+const getFileAndFolderPaths = pdf2mdCli.__get__('getFileAndFolderPaths') // eslint-disable-line no-underscore-dangle
+const getAllFileAndFolderPaths = pdf2mdCli.__get__('getAllFileAndFolderPaths') // eslint-disable-line no-underscore-dangle
 
 describe('functions: entry point file retrieval', function () {
   it('Assert getPaths from a single directory returns the proper arrays', function () {

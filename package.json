@@ -13,7 +13,6 @@
   "scripts": {
     "lint": "eslint lib --cache",
     "test": "mocha test --recursive",
-    "test:watch": "mocha test --recursive --watch",
     "check": "npm run lint && npm run test"
   },
   "keywords": [

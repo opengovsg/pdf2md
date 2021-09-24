@@ -34,7 +34,7 @@
   "dependencies": {
     "enumify": "^1.0.4",
     "minimist": "^1.2.5",
-    "pdfjs-dist": "^2.5.207"
+    "pdfjs-dist": "^2.9.359"
   },
   "devDependencies": {
     "@opengovsg/eslint-config-opengovsg": "^1.0.6",

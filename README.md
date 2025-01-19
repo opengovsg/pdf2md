@@ -11,6 +11,7 @@ See [Releases](https://github.com/opendocsg/pdf2md/releases)
 ### Library
 
 ```js
+const path = require('path');
 const fs = require('fs')
 const pdf2md = require('@opendocsg/pdf2md')
 

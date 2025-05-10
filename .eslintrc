@@ -2,10 +2,11 @@
   "extends": [
     "@opengovsg/eslint-config-opengovsg"
   ],
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 6,
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
   "env": {
     "node": true,
@@ -15,7 +16,8 @@
   "plugins": [
     "jasmine",
     "flowtype",
-    "flowtype-comment"
+    "flowtype-comment",
+    "@typescript-eslint"
   ],
   "rules": {
     "no-console": 1,
@@ -26,5 +28,18 @@
       "onlyFilesWithFlowAnnotation": true
     }
   },
-  "ignorePatterns": ["node_modules/", "**/*.ts"]
+  "ignorePatterns": [
+    "node_modules/",
+    "dist/"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "rules": {
+        "flowtype/require-valid-file-annotation": 0
+      }
+    }
+  ]
 }

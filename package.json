@@ -2,10 +2,10 @@
   "name": "@opendocsg/pdf2md",
   "version": "0.2.1",
   "description": "A PDF to Markdown Converter",
-  "main": "lib/pdf2md.js",
-  "types": "types/pdf2md.d.ts",
+  "main": "lib/pdf2md.ts",
+  "type": "module",
   "bin": {
-    "pdf2md": "lib/pdf2md-cli.js"
+    "pdf2md": "lib/pdf2md-cli.ts"
   },
   "files": [
     "/lib",
@@ -13,10 +13,11 @@
     "/types"
   ],
   "scripts": {
-    "lint": "eslint lib --cache",
-    "test": "mocha test --recursive",
-    "test:watch": "mocha test --recursive --watch",
-    "test:coverage": "nyc npm run test",
+    "build": "tsc",
+    "lint": "eslint lib --ext .ts --cache",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "check": "npm run lint && npm run test:coverage"
   },
   "keywords": [
@@ -40,8 +41,12 @@
   },
   "devDependencies": {
     "@opengovsg/eslint-config-opengovsg": "^1.0.6",
+    "@types/minimist": "^1.2.5",
+    "@types/node": "^22.15.17",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "@vitest/coverage-v8": "^3.1.3",
     "babel-eslint": "^10.0.2",
-    "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^13.0.1",
     "eslint-plugin-flowtype": "^3.11.1",
@@ -52,9 +57,11 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "flow-bin": "^0.102.0",
-    "mocha": "^10.2.0",
     "mock-fs": "^4.10.1",
     "nyc": "^15.1.0",
-    "rewire": "^5.0.0"
-  }
+    "rewire": "^5.0.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.3"
+  },
+  "packageManager": "yarn@3.3.1+sha512.e355f587284d06d2c0c1c2259c68746aa1f1f6cdeedefce543cec206709beeb7951c0a27cdbfb7b5736a576854829af9c660bbe82052192c49f108a546994b71"
 }

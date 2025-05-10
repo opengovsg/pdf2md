@@ -1,5 +1,5 @@
 // We're creating a TypeScript-friendly version that works with the existing code
-import { Enum } from 'enumify'
+import { Enumify } from 'enumify'
 
 export interface WordTypeProperties {
   attachWithoutWhitespace?: boolean
@@ -8,33 +8,31 @@ export interface WordTypeProperties {
 }
 
 // An Markdown word element
-class WordType extends Enum {
+class WordType extends Enumify {
   attachWithoutWhitespace?: boolean
   plainTextFormat?: boolean
   toText!: (string: string) => string
-}
 
-// @ts-ignore: initEnum is added by Enumify at runtime
-WordType.initEnum({
-  LINK: {
+  LINK = {
     toText(string: string): string {
       return `[${string}](${string})`
     },
-  },
-  FOOTNOTE_LINK: {
+  };
+  FOOTNOTE_LINK = {
     attachWithoutWhitespace: true,
     plainTextFormat: true,
     toText(string: string): string {
       return `^${string}`
       // return `<sup>[${string}](#${string})</sup>`
     },
-  },
-  FOOTNOTE: {
+  };
+  FOOTNOTE = {
     toText(string: string): string {
       return `(^${string})`
     },
-  },
-})
+  };
+
+}
 
 // Create a namespace with the same name as the class to mimic static properties
 // namespace WordType {

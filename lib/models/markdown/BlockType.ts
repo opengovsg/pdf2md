@@ -1,4 +1,4 @@
-import { Enum } from 'enumify'
+import { Enumify } from 'enumify'
 import LineItemBlock from '../LineItemBlock'
 import LineItem from '../LineItem'
 import Word from '../Word'
@@ -69,91 +69,89 @@ interface BlockTypeProps {
 }
 
 // An Markdown block
-class BlockType extends Enum {
+class BlockType extends Enumify {
   headline?: boolean
   headlineLevel?: number
   mergeToBlock?: boolean
   mergeFollowingNonTypedItems?: boolean
   mergeFollowingNonTypedItemsWithSmallDistance?: boolean
   toText!: (block: LineItemBlock) => string
-}
 
-// @ts-ignore: initEnum is added by Enumify at runtime
-BlockType.initEnum({
-  H1: {
+  H1 = {
     headline: true,
     headlineLevel: 1,
     toText(block: LineItemBlock): string {
       return '# ' + linesToText(block.items, true)
     },
-  },
-  H2: {
+  };
+  H2 = {
     headline: true,
     headlineLevel: 2,
     toText(block: LineItemBlock): string {
       return '## ' + linesToText(block.items, true)
     },
-  },
-  H3: {
+  };
+  H3 = {
     headline: true,
     headlineLevel: 3,
     toText(block: LineItemBlock): string {
       return '### ' + linesToText(block.items, true)
     },
-  },
-  H4: {
+  };
+  H4 = {
     headline: true,
     headlineLevel: 4,
     toText(block: LineItemBlock): string {
       return '#### ' + linesToText(block.items, true)
     },
-  },
-  H5: {
+  };
+  H5 = {
     headline: true,
     headlineLevel: 5,
     toText(block: LineItemBlock): string {
       return '##### ' + linesToText(block.items, true)
     },
-  },
-  H6: {
+  };
+  H6 = {
     headline: true,
     headlineLevel: 6,
     toText(block: LineItemBlock): string {
       return '###### ' + linesToText(block.items, true)
     },
-  },
-  TOC: {
+  };
+  TOC = {
     mergeToBlock: true,
     toText(block: LineItemBlock): string {
       return linesToText(block.items, true)
     },
-  },
-  FOOTNOTES: {
+  };
+  FOOTNOTES = {
     mergeToBlock: true,
     mergeFollowingNonTypedItems: true,
     toText(block: LineItemBlock): string {
       return linesToText(block.items, false)
     },
-  },
-  CODE: {
+  };
+  CODE = {
     mergeToBlock: true,
     toText(block: LineItemBlock): string {
       return '```\n' + linesToText(block.items, true) + '```'
     },
-  },
-  LIST: {
+  };
+  LIST = {
     mergeToBlock: false,
     mergeFollowingNonTypedItemsWithSmallDistance: true,
     toText(block: LineItemBlock): string {
       return linesToText(block.items, false)
     },
-  },
-  PARAGRAPH: {
+  };
+  PARAGRAPH = {
     toText(block: LineItemBlock): string {
       return linesToText(block.items, false)
     },
-  },
-})
+  };
+
+}
 
 // Create a namespace with the same name as the class to mimic static properties
 // namespace BlockType {

@@ -1,5 +1,5 @@
 // We're creating a TypeScript-friendly version that works with the existing code
-import { Enum } from 'enumify'
+import { Enumify } from 'enumify'
 
 export interface WordFormatProperties {
   startSymbol: string
@@ -7,7 +7,7 @@ export interface WordFormatProperties {
 }
 
 // The format of a word element
-class WordFormat extends Enum {
+class WordFormat extends Enumify {
   startSymbol!: string
   endSymbol!: string
 
@@ -19,23 +19,21 @@ class WordFormat extends Enum {
       return undefined;
     }
   }
-}
 
-// @ts-ignore: initEnum is added by Enumify at runtime
-WordFormat.initEnum({
-  BOLD: {
+  BOLD = {
     startSymbol: '**',
     endSymbol: '**',
-  },
-  OBLIQUE: {
+  };
+  OBLIQUE = {
     startSymbol: '_',
     endSymbol: '_',
-  },
-  BOLD_OBLIQUE: {
+  };
+  BOLD_OBLIQUE = {
     startSymbol: '**_',
     endSymbol: '_**',
-  },
-})
+  };
+
+}
 
 // Create a namespace with the same name as the class to mimic static properties
 // namespace WordFormat {

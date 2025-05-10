@@ -17,7 +17,7 @@ export default class DetectListLevels extends ToLineItemBlockTransformation {
     let modifiedBlocks = 0
     parseResult.pages.forEach(page => {
       const blocks = page.items as unknown as LineItemBlock[]
-      blocks.filter(block => block.type === BlockType.LIST.name).forEach(listBlock => {
+      blocks.filter(block => block.type === (BlockType as any).LIST).forEach(listBlock => {
         let lastItemX: number | undefined
         let currentLevel = 0
         const xByLevel: Record<number, number> = {}

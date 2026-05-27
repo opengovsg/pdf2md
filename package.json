@@ -39,22 +39,12 @@
     "unpdf": "^1.4.0"
   },
   "devDependencies": {
-    "@opengovsg/eslint-config-opengovsg": "^1.0.6",
-    "babel-eslint": "^10.0.2",
+    "@eslint/compat": "^2.1.0",
     "chai": "^4.2.0",
-    "eslint": "^6.8.0",
-    "eslint-config-standard": "^13.0.1",
-    "eslint-plugin-flowtype": "^3.11.1",
-    "eslint-plugin-flowtype-comment": "^1.0.0",
-    "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-jasmine": "^2.2.0",
-    "eslint-plugin-node": "^9.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "flow-bin": "^0.102.0",
+    "eslint": "^10.4.0",
     "mocha": "^10.2.0",
     "mock-fs": "^4.10.1",
     "nyc": "^15.1.0",
-    "rewire": "^5.0.0"
+    "rewire": "^9.0.1"
   }
 }

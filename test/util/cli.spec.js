@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 
-const fs = require('fs')
+const path = require('path')
 const mock = require('mock-fs')
 const rewire = require('rewire')
 const cli = rewire('../../lib/util/cli.js')
@@ -12,18 +12,47 @@ const runFn = pdf2md_cli.__get__('run') // eslint-disable-line no-underscore-dan
 describe('run: handles files or paths containing a period', function () {
   it('Assert filenames with a period have an identical filename in markdown', function () {
     const createMarkdownFilesMock = function (allFilePaths, allOutputPaths) {
-      expect(allOutputPaths).to.have.members(['output/file.in-root'])
+      expect(allOutputPaths).to.have.members([path.join('output', 'file.in-root')])
     }
 
-    pdf2md_cli.__set__('createMarkdownFiles', createMarkdownFilesMock) // eslint-disable-line no-underscore-dangle
+    const revert = pdf2md_cli.__set__('createMarkdownFiles', createMarkdownFilesMock) // eslint-disable-line no-underscore-dangle
 
-    mock({
-      'output': {},
-      'file.in-root.pdf':  fs.readFileSync('examples/ExamplePdf-2.pdf'),
-    })
+    try {
+      mock({
+        'output': {},
+        'file.in-root.pdf': 'file content here',
+      })
 
-    runFn('.', 'output')
-    mock.restore()
+      runFn('.', 'output')
+    } finally {
+      mock.restore()
+      revert()
+    }
+  })
+})
+
+describe('run: preserve subdirectory structure to prevent clobbers', function () {
+  it('Assert identical filenames in nested subdirs do not clobber each other', function () {
+    const createMarkdownFilesMock = function (allFilePaths, allOutputPaths) {
+      expect(allOutputPaths).to.have.members([path.join('output', 'file.in-root'), path.join('output/subdir', 'file.in-root')])
+    }
+
+    const revert = pdf2md_cli.__set__('createMarkdownFiles', createMarkdownFilesMock) // eslint-disable-line no-underscore-dangle
+
+    try {
+      mock({
+        'output': {},
+        'file.in-root.pdf': 'file content here',
+        'subdir': {
+          'file.in-root.pdf': 'file content here',
+        },
+      })
+
+      runFn('.', 'output')
+    } finally {
+      mock.restore()
+      revert()
+    }
   })
 })
 

@@ -1,10 +1,31 @@
 const { expect } = require('chai')
 
+const fs = require('fs')
 const mock = require('mock-fs')
 const rewire = require('rewire')
 const cli = rewire('../../lib/util/cli.js')
+const pdf2md_cli = rewire('../../lib/pdf2md-cli.js')
 const getFileAndFolderPaths = cli.__get__('getFileAndFolderPaths') // eslint-disable-line no-underscore-dangle
 const getAllFileAndFolderPaths = cli.__get__('getAllFileAndFolderPaths') // eslint-disable-line no-underscore-dangle
+const runFn = pdf2md_cli.__get__('run') // eslint-disable-line no-underscore-dangle
+
+describe('run: handles files or paths containing a period', function () {
+  it('Assert filenames with a period have an identical filename in markdown', function () {
+    const createMarkdownFilesMock = function (allFilePaths, allOutputPaths) {
+      expect(allOutputPaths).to.have.members(['output/file.in-root'])
+    }
+
+    pdf2md_cli.__set__('createMarkdownFiles', createMarkdownFilesMock) // eslint-disable-line no-underscore-dangle
+
+    mock({
+      'output': {},
+      'file.in-root.pdf':  fs.readFileSync('examples/ExamplePdf-2.pdf'),
+    })
+
+    runFn('.', 'output')
+    mock.restore()
+  })
+})
 
 describe('functions: entry point file retrieval', function () {
   it('Assert getPaths from a single directory returns the proper arrays', function () {

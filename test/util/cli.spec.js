@@ -1,10 +1,60 @@
 const { expect } = require('chai')
 
+const path = require('path')
 const mock = require('mock-fs')
 const rewire = require('rewire')
 const cli = rewire('../../lib/util/cli.js')
+const pdf2md_cli = rewire('../../lib/pdf2md-cli.js')
 const getFileAndFolderPaths = cli.__get__('getFileAndFolderPaths') // eslint-disable-line no-underscore-dangle
 const getAllFileAndFolderPaths = cli.__get__('getAllFileAndFolderPaths') // eslint-disable-line no-underscore-dangle
+const runFn = pdf2md_cli.__get__('run') // eslint-disable-line no-underscore-dangle
+
+describe('run: handles files or paths containing a period', function () {
+  it('Assert filenames with a period have an identical filename in markdown', function () {
+    const createMarkdownFilesMock = function (allFilePaths, allOutputPaths) {
+      expect(allOutputPaths).to.have.members([path.join('output', 'file.in-root')])
+    }
+
+    const revert = pdf2md_cli.__set__('createMarkdownFiles', createMarkdownFilesMock) // eslint-disable-line no-underscore-dangle
+
+    try {
+      mock({
+        'output': {},
+        'file.in-root.pdf': 'file content here',
+      })
+
+      runFn('.', 'output')
+    } finally {
+      mock.restore()
+      revert()
+    }
+  })
+})
+
+describe('run: preserve subdirectory structure to prevent clobbers', function () {
+  it('Assert identical filenames in nested subdirs do not clobber each other', function () {
+    const createMarkdownFilesMock = function (allFilePaths, allOutputPaths) {
+      expect(allOutputPaths).to.have.members([path.join('output', 'file.in-root'), path.join('output/subdir', 'file.in-root')])
+    }
+
+    const revert = pdf2md_cli.__set__('createMarkdownFiles', createMarkdownFilesMock) // eslint-disable-line no-underscore-dangle
+
+    try {
+      mock({
+        'output': {},
+        'file.in-root.pdf': 'file content here',
+        'subdir': {
+          'file.in-root.pdf': 'file content here',
+        },
+      })
+
+      runFn('.', 'output')
+    } finally {
+      mock.restore()
+      revert()
+    }
+  })
+})
 
 describe('functions: entry point file retrieval', function () {
   it('Assert getPaths from a single directory returns the proper arrays', function () {

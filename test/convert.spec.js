@@ -23,4 +23,14 @@ describe('integration test: convert pdf to markdown', () => {
     expect(text).to.include('**Fett** ist auch interessant.')
     expect(text).to.include('**_FETTUNDKURSIV_**')
   })
+
+  it('should not add empty footnote markers to list items', async () => {
+    const filePath = path.resolve(__dirname, '../examples/ExamplePdf.pdf')
+
+    const pdfBuffer = new Uint8Array(fs.readFileSync(filePath))
+    const text = await pdf2md(pdfBuffer)
+
+    expect(text).not.to.include('(^)')
+    expect(text).to.include('- Eintrag 1')
+  })
 })
